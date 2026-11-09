@@ -1,10 +1,3 @@
-//
-//  JournalCardView.swift
-//  🪿Hello World!
-//
-//  Created by Hanin Alfehaid on 29/05/1448 AH.
-//
-
 import SwiftUI
 
 struct JournalCardView: View {
@@ -32,11 +25,13 @@ struct JournalCardView: View {
                 .font(.system(size: 14))
                 .foregroundStyle(Color.textSecondary)
 
-            Text(entry.content)
-                .font(.system(size: 18))
-                .foregroundStyle(.white)
-                .lineLimit(5)
-                .padding(.top, 12)
+            if !entry.content.isEmpty {
+                Text(entry.content)
+                    .font(.system(size: 18))
+                    .foregroundStyle(.white)
+                    .lineLimit(5)
+                    .padding(.top, 12)
+            }
         }
         .padding(24)
         .frame(maxWidth: .infinity, alignment: .leading)

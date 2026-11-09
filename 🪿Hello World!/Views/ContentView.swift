@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var viewModel = JournalViewModel()
+    @State private var showEditor = false
 
     var body: some View {
         NavigationStack {
@@ -40,11 +41,14 @@ struct ContentView: View {
                     }
 
                     Button {
-                        // بنربطه بشاشة الإضافة في اليوم الخامس
+                        showEditor = true
                     } label: {
                         Image(systemName: "plus")
                     }
                 }
+            }
+            .sheet(isPresented: $showEditor) {
+                JournalEditorView(viewModel: viewModel)
             }
         }
     }
