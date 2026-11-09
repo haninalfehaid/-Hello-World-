@@ -9,10 +9,29 @@ import SwiftUI
 
 struct EmptyStateView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(spacing: 12) {
+            Image("emptyBook")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150)
+                .padding(.bottom, 16)
+
+            Text("Begin Your Journal")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundStyle(Color.textAccent)
+
+            Text("Craft your personal diary, tap the plus icon to begin")
+                .font(.system(size: 18, weight: .light))
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 40)
+        }
     }
 }
 
 #Preview {
-    EmptyStateView()
+    ZStack {
+        Color.black.ignoresSafeArea()
+        EmptyStateView()
+    }
 }
