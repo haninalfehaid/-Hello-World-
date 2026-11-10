@@ -16,7 +16,7 @@ struct JournalEditorView: View {
                     .font(.system(size: 34, weight: .bold))
                     .foregroundStyle(.white)
 
-                Text(formattedDate)
+                Text((entry?.date ?? .now).journalFormatted)
                     .font(.system(size: 14))
                     .foregroundStyle(Color.textSecondary)
 
@@ -87,11 +87,7 @@ struct JournalEditorView: View {
         }
     }
 
-    private var formattedDate: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        return formatter.string(from: entry?.date ?? .now)
-    }
+  
 
     private func save() {
         if var entry {

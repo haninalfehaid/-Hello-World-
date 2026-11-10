@@ -16,15 +16,17 @@ struct ContentView: View {
                     EmptyStateView()
                 } else if viewModel.displayedEntries.isEmpty {
                     VStack(spacing: 12) {
-                        Image(systemName: "bookmark")
+                        Image(systemName: isSearching ? "magnifyingglass" : "bookmark")
                             .font(.system(size: 48))
                             .foregroundStyle(Color.textAccent)
 
-                        Text("No bookmarked journals yet")
+                        Text(isSearching ? "No results" : "No bookmarked journals yet")
                             .font(.system(size: 24, weight: .bold))
                             .foregroundStyle(Color.textAccent)
 
-                        Text("Tap the bookmark icon on a journal to save it here")
+                        Text(isSearching
+                             ? "Try a different word"
+                             : "Tap the bookmark icon on a journal to save it here")
                             .font(.system(size: 18, weight: .light))
                             .foregroundStyle(.white)
                             .multilineTextAlignment(.center)
@@ -59,6 +61,7 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Journal")
+            .searchable(text: $viewModel.searchText, prompt: "Search")
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Menu {
@@ -94,6 +97,10 @@ struct ContentView: View {
                 Text("Are you sure you want to delete this journal?")
             }
         }
+    }
+
+    private var isSearching: Bool {
+        !viewModel.searchText.isEmpty
     }
 }
 

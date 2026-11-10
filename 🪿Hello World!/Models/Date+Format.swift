@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+extension Date {
+    private static let journalFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        return formatter
+    }()
+
+    var journalFormatted: String {
+        Date.journalFormatter.string(from: self)
+    }
+}

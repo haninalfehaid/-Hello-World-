@@ -21,7 +21,7 @@ struct JournalCardView: View {
                 .buttonStyle(.plain)
             }
 
-            Text(formattedDate)
+            Text(entry.date.journalFormatted)
                 .font(.system(size: 14))
                 .foregroundStyle(Color.textSecondary)
 
@@ -39,11 +39,7 @@ struct JournalCardView: View {
         .clipShape(RoundedRectangle(cornerRadius: 32))
     }
 
-    private var formattedDate: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        return formatter.string(from: entry.date)
-    }
+   
 }
 
 #Preview {
