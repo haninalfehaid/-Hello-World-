@@ -5,7 +5,15 @@
 A simple journal app built with SwiftUI. Write your daily thoughts, bookmark the ones you love, and find any journal with search.
 
 This app was built as part of a 10-day challenge to bring a provided UI design to life.
+## 📱 Screenshots
 
+| Splash | Empty State | Journal |
+|---|---|---|
+| ![Splash](Screenshots/splash.png) | ![Empty](Screenshots/empty.png) | ![Journal](Screenshots/journal.png) |
+
+| New Journal | Swipe | Delete Alert | Discard Alert |
+|---|---|---|---|
+| ![New](Screenshots/new.png) | ![Swipe](Screenshots/swipe.png) | ![Delete](Screenshots/delete.png) | ![Discard](Screenshots/discard.png) |
 ---
 
 ## ✨ Features
