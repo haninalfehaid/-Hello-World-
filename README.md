@@ -20,6 +20,7 @@ This app was built as part of a 10-day challenge to bring a provided UI design t
 - **Sort** by bookmark or by entry date
 - **Search** inside titles and text
 - **Liquid Glass** design for iOS 26
+- **Saved on device** so journals stay after closing the app
 
 ---
 
@@ -60,6 +61,7 @@ Views/
 - How SwiftUI updates the screen with **@State**, **@Published**, and **Binding**
 - How to use **sheets**, **alerts**, **swipe actions**, and **search**
 - How to manage a project on **GitHub** with clear commits
+- How to save data on the device with **Codable** and **JSON**
 
 ---
 
