@@ -66,6 +66,7 @@ struct JournalEditorView: View {
                         Image(systemName: "checkmark")
                     }
                     .buttonStyle(.glassProminent)
+                    .tint(Color("AccentColor"))
                     .disabled(title.isEmpty)
                 }
             }
