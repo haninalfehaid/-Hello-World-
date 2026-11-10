@@ -7,13 +7,18 @@ A simple journal app built with SwiftUI. Write your daily thoughts, bookmark the
 This app was built as part of a 10-day challenge to bring a provided UI design to life.
 ## 📱 Screenshots
 
-| Splash | Empty State | Journal |
-|---|---|---|
-| ![Splash](Screenshots/splash.png) | ![Empty](Screenshots/empty.png) | ![Journal](Screenshots/journal.png) |
+<p align="center">
+  <img src="Screenshots/splash.png" width="200" alt="Splash">
+  <img src="Screenshots/empty.png" width="200" alt="Empty State">
+  <img src="Screenshots/journal.png" width="200" alt="Journal">
+</p>
 
-| New Journal | Swipe | Delete Alert | Discard Alert |
-|---|---|---|---|
-| ![New](Screenshots/new.png) | ![Swipe](Screenshots/swipe.png) | ![Delete](Screenshots/delete.png) | ![Discard](Screenshots/discard.png) |
+<p align="center">
+  <img src="Screenshots/new.png" width="200" alt="New Journal">
+  <img src="Screenshots/swipe.png" width="200" alt="Swipe">
+  <img src="Screenshots/delete.png" width="200" alt="Delete Alert">
+  <img src="Screenshots/discard.png" width="200" alt="Discard Alert">
+</p>
 ---
 
 ## ✨ Features
