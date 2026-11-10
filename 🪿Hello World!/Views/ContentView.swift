@@ -3,6 +3,9 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var viewModel = JournalViewModel()
     @State private var showEditor = false
+    @State private var selectedEntry: JournalEntry?
+    @State private var entryToDelete: JournalEntry?
+    @State private var showDeleteAlert = false
 
     var body: some View {
         NavigationStack {
@@ -11,15 +14,44 @@ struct ContentView: View {
 
                 if viewModel.entries.isEmpty {
                     EmptyStateView()
+                } else if viewModel.displayedEntries.isEmpty {
+                    VStack(spacing: 12) {
+                        Image(systemName: "bookmark")
+                            .font(.system(size: 48))
+                            .foregroundStyle(Color.textAccent)
+
+                        Text("No bookmarked journals yet")
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundStyle(Color.textAccent)
+
+                        Text("Tap the bookmark icon on a journal to save it here")
+                            .font(.system(size: 18, weight: .light))
+                            .foregroundStyle(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 40)
+                    }
                 } else {
                     List {
                         ForEach(viewModel.displayedEntries) { entry in
                             JournalCardView(entry: entry) {
                                 viewModel.toggleBookmark(entry)
                             }
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                selectedEntry = entry
+                            }
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
                             .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button {
+                                    entryToDelete = entry
+                                    showDeleteAlert = true
+                                } label: {
+                                    Image(systemName: "trash.fill")
+                                }
+                                .tint(Color.destructive)
+                            }
                         }
                     }
                     .listStyle(.plain)
@@ -49,6 +81,17 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showEditor) {
                 JournalEditorView(viewModel: viewModel)
+            }
+            .sheet(item: $selectedEntry) { entry in
+                JournalEditorView(viewModel: viewModel, entry: entry)
+            }
+            .alert("Delete Journal?", isPresented: $showDeleteAlert, presenting: entryToDelete) { entry in
+                Button("Cancel", role: .cancel) { }
+                Button("Delete", role: .destructive) {
+                    viewModel.delete(entry)
+                }
+            } message: { _ in
+                Text("Are you sure you want to delete this journal?")
             }
         }
     }

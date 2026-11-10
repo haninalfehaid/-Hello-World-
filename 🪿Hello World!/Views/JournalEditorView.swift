@@ -1,10 +1,3 @@
-//
-//  JournalEditorView.swift
-//  🪿Hello World!
-//
-//  Created by Hanin Alfehaid on 29/05/1448 AH.
-//
-
 import SwiftUI
 
 struct JournalEditorView: View {
@@ -14,6 +7,7 @@ struct JournalEditorView: View {
 
     @State private var title = ""
     @State private var content = ""
+    @State private var showDiscardDialog = false
 
     var body: some View {
         NavigationStack {
@@ -46,9 +40,23 @@ struct JournalEditorView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
-                        dismiss()
+                        if hasChanges {
+                            showDiscardDialog = true
+                        } else {
+                            dismiss()
+                        }
                     } label: {
                         Image(systemName: "xmark")
+                    }
+                    .confirmationDialog(
+                        "Are you sure you want to discard changes on this journal?",
+                        isPresented: $showDiscardDialog,
+                        titleVisibility: .visible
+                    ) {
+                        Button("Discard Changes", role: .destructive) {
+                            dismiss()
+                        }
+                        Button("Keep Editing") { }
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
@@ -61,12 +69,21 @@ struct JournalEditorView: View {
                     .disabled(title.isEmpty)
                 }
             }
+            .interactiveDismissDisabled(hasChanges)
             .onAppear {
                 if let entry {
                     title = entry.title
                     content = entry.content
                 }
             }
+        }
+    }
+
+    private var hasChanges: Bool {
+        if let entry {
+            return title != entry.title || content != entry.content
+        } else {
+            return !title.isEmpty || !content.isEmpty
         }
     }
 
