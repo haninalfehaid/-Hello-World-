@@ -1,17 +1,24 @@
-//
-//  JournalViewModel.swift
-//  🪿Hello World!
-//
-//  Created by Hanin Alfehaid on 29/05/1448 AH.
-//
-
-import Foundation
 import SwiftUI
 import Combine
+
 class JournalViewModel: ObservableObject {
-    @Published var entries: [JournalEntry] = []
+    @Published var entries: [JournalEntry] = [] {
+        didSet {
+            save()
+        }
+    }
     @Published var searchText = ""
     @Published var sortOption: SortOption = .entryDate
+
+    private let isPreview: Bool
+    private let fileURL = URL.documentsDirectory.appending(path: "journals.json")
+
+    init(isPreview: Bool = false) {
+        self.isPreview = isPreview
+        if !isPreview {
+            load()
+        }
+    }
 
     var displayedEntries: [JournalEntry] {
         var result = entries
@@ -49,6 +56,23 @@ class JournalViewModel: ObservableObject {
     func toggleBookmark(_ entry: JournalEntry) {
         if let index = entries.firstIndex(where: { $0.id == entry.id }) {
             entries[index].isBookmarked.toggle()
+        }
+    }
+
+    private func save() {
+        guard !isPreview else { return }
+        do {
+            let data = try JSONEncoder().encode(entries)
+            try data.write(to: fileURL)
+        } catch {
+            print("Could not save journals: \(error)")
+        }
+    }
+
+    private func load() {
+        guard let data = try? Data(contentsOf: fileURL) else { return }
+        if let saved = try? JSONDecoder().decode([JournalEntry].self, from: data) {
+            entries = saved
         }
     }
 }

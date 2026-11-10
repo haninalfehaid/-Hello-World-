@@ -110,7 +110,7 @@ struct ContentView: View {
 }
 
 #Preview("With Entries") {
-    let viewModel = JournalViewModel()
+    let viewModel = JournalViewModel(isPreview: true)
     viewModel.add(title: "My Birthday", content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.")
     viewModel.add(title: "Today's Journal", content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.")
     viewModel.add(title: "Great Day", content: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros.")

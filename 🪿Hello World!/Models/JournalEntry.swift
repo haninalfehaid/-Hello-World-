@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct JournalEntry: Identifiable {
-    let id = UUID()
+struct JournalEntry: Identifiable, Codable {
+    var id = UUID()
     var title: String
     var content: String
     var date: Date
