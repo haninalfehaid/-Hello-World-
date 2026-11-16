@@ -32,7 +32,7 @@ This app was built as part of a 10-day challenge to bring a provided UI design t
 - **Bookmark** your favorite journals
 - **Sort** by bookmark or by entry date
 - **Search** inside titles and text
-- **Liquid Glass** design for iOS 26
+- **Liquid Glass** design (introduced in iOS 26)
 - **Saved on device** so journals stay after closing the app
 
 ---
