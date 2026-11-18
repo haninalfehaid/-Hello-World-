@@ -32,7 +32,12 @@ class JournalViewModel: ObservableObject {
 
         switch sortOption {
         case .bookmark:
-            result = result.filter { $0.isBookmarked }
+            result.sort {
+                if $0.isBookmarked != $1.isBookmarked {
+                    return $0.isBookmarked
+                }
+                return $0.date > $1.date
+            }
         case .entryDate:
             result.sort { $0.date > $1.date }
         }
